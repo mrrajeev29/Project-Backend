@@ -8,4 +8,4 @@ const connectDB=async()=>{
         console.log(`Mongo Connect Error`.bgRed.white);
     }
 }
-module.exports=connectDB;
+module.exports=connectDB; 

@@ -59,7 +59,7 @@ exports.getAllUsers=async (req,res)=>{
         })
     }
 };
-
+ 
 
 exports.loginController=async (req,res)=>{
     try{
@@ -98,3 +98,28 @@ exports.loginController=async (req,res)=>{
         })
     }
 };
+
+exports.changePassword= async(req,res)=>{
+    const existingUser= await userModel.findOne({email:req.params.email});
+    console.log(existingUser)
+    try{
+        if (existingUser)
+        {
+            const hashedPassword = await bcrypt.hash(req.body.password,10)
+            existingUser.password=hashedPassword;
+            await existingUser.save()
+            return res.status(201).send({
+            success:true,
+            message:"Password Changed",
+            existingUser
+        })
+        }
+    }catch(error){
+        console.log(error)
+        return res.status(500).send({
+            message:'Error In Changing Password',
+            success:false,
+            error
+        })
+    }
+}

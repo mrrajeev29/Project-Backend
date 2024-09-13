@@ -6,7 +6,6 @@ const connectDB = require('./config/db')
 
 const userRoutes=require('./routes/userRoutes')
 const codeRoutes=require('./routes/codeRoutes')
-
 connectDB();
 
 
